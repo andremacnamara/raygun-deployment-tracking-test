@@ -18,7 +18,8 @@ const initRaygunScript = () => {
       e:g})}}(window,document,"script","//cdn.raygun.io/raygun4js/raygun.min.js","rg4js");
 
       rg4js('apiKey', '${process.env.RAYGUN_API_KEY}');
-      
+      rg4js('enableCrashReporting', true);
+
        rg4js('onBeforeSend', function (payload) {
           let updatedPayload = payload;            
           if (payload.Details?.Error?.Message == 'Script error.') {
