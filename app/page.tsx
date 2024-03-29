@@ -15,7 +15,7 @@ export default function Home() {
   const handleClick = () => {
     throw new Error("This is a test exception");
   };
-  
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -35,7 +35,7 @@ export default function Home() {
               src="/vercel.svg"
               alt="Vercel Logo"
               className={styles.vercelLogo}
-              width={100}
+              width={101}
               height={24}
               priority
             />
