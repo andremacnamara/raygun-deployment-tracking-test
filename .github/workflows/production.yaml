@@ -16,6 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set up Git
+        run: |
+          git config --global user.email "${{ github.event.head_commit.author.email }}"
+          git config --global user.name "${{ github.event.head_commit.author.name }}"
+
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
@@ -29,23 +34,24 @@ jobs:
         run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Tag Release
+        id: tag_release
         run: |
           tag_name="v1.0-${GITHUB_SHA::8}"
           git tag -a $tag_name -m "Release $tag_name"
           echo "::set-output name=tag::$tag_name"
         if: success()
-        
+
       - name: Push Tag
-        run: git push origin ${{ steps.tag.outputs.tag }}
+        run: git push origin ${{ steps.tag_release.outputs.tag }}
         if: success()
 
       - name: Track Deployment with Raygun
         run: |
           bash .github/workflows/raygun_deployment_tracking.sh -t ${{ secrets.RAYGUN_PAT_TOKEN }} \
                                  -a ${{ secrets.RAYGUN_API_KEY }} \
-                                 -v ${{ steps.tag.outputs.tag }} \
-                                 -o "Your Name" \
-                                 -e "your@email.com" \
+                                 -v ${{ steps.tag_release.outputs.tag }} \
+                                 -o "${{ github.event.head_commit.author.name }}" \
+                                 -e "${{ github.event.head_commit.author.email }}" \
                                  -n "Deployment notes" \
                                  -i "GitHub" \
                                  -s "git" \
