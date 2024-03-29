@@ -30,7 +30,7 @@ jobs:
 
       - name: Track Deployment with Raygun
         run: |
-          bash raygun_script.sh -t $RAYGUN_PAT_TOKEN \
+          bash raygun_deployment_tracking.sh -t $RAYGUN_PAT_TOKEN \
                                  -a $RAYGUN_API_KEY \
                                  -v $GITHUB_SHA \
                                  -o "Your Name" \
