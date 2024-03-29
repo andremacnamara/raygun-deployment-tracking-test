@@ -69,5 +69,5 @@ jobs:
                                  -e "${{ github.event.head_commit.author.email }}" \
                                  -n "Deployment notes" \
                                  -i "GitHub" \
-                                 -s "git" \
+                                 -s "GitHub" \
                                  -d "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
