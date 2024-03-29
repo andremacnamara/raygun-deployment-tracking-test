@@ -20,6 +20,10 @@ export default function Home() {
     throw new Error("New error for raygun test");
   };
 
+  const handleAnotherNewClick = () => {
+    throw new Error("This clicked failed");
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -76,6 +80,13 @@ export default function Home() {
           onClick={handleNewClick}
         >
           New Click
+        </button>
+
+        <button
+          style={{ width: "200px", height: "40px" }}
+          onClick={handleAnotherNewClick}
+        >
+          Another New Click
         </button>
 
         <a
