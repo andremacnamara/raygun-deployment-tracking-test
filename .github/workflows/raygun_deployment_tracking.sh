@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 RAYGUN_PAT_TOKEN=""
 RAYGUN_API_KEY=""
