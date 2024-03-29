@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   const handleNewClick = () => {
-    throw new Error("This is a new test /12exception to track releases");
+    throw new Error("This is a new test exception to track releases.1");
   };
 
   return (
