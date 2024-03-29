@@ -43,6 +43,8 @@ jobs:
         if: success()
         
       - name: Push Tag
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: git push origin ${{ steps.tag_release.outputs.tag }} --force-with-lease
         if: success()
 
