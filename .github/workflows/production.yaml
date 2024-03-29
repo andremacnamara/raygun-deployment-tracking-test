@@ -20,7 +20,7 @@ jobs:
         run: |
           git config --global user.email "${{ github.event.head_commit.author.email }}"
           git config --global user.name "${{ github.event.head_commit.author.name }}"
-          echo "${{ secrets.GITHUB_TOKEN }}" | git credential-manager-core store
+          git config --global credential.helper store
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
@@ -41,7 +41,7 @@ jobs:
           git tag -a $tag_name -m "Release $tag_name"
           echo "::set-output name=tag::$tag_name"
         if: success()
-
+        
       - name: Push Tag
         run: git push origin ${{ steps.tag_release.outputs.tag }} --force-with-lease
         if: success()
