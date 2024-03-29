@@ -41,12 +41,24 @@ jobs:
           git tag -a $tag_name -m "Release $tag_name"
           echo "::set-output name=tag::$tag_name"
         if: success()
-        
+
       - name: Push Tag
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: git push origin ${{ steps.tag_release.outputs.tag }} --force-with-lease
         if: success()
+
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag_release.outputs.tag }}
+          release_name: Release ${{ steps.tag_release.outputs.tag }}
+          body: |
+            Describe your release notes here.
+          draft: false
+          prerelease: false
 
       - name: Track Deployment with Raygun
         run: |
