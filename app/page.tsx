@@ -16,6 +16,10 @@ export default function Home() {
     throw new Error("This is a test exception");
   };
 
+  const handleNewClick = () => {
+    throw new Error("This is a new test exception to track releases");
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
@@ -66,6 +70,13 @@ export default function Home() {
           </h2>
           <p>Find in-depth information about Next.js features and API.</p>
         </a>
+
+        <button
+          style={{ width: "120px", height: "40px" }}
+          onClick={handleNewClick}
+        >
+          New Click
+        </button>
 
         <a
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
