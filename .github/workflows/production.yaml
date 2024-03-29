@@ -31,7 +31,7 @@ jobs:
       - name: Track Deployment with Raygun
         run: |
           bash .github/workflows/raygun_deployment_tracking.sh -t ${{ secrets.RAYGUN_PAT_TOKEN }} \
-                                 a ${{ secrets.RAYGUN_API_KEY }} \
+                                 -a ${{ secrets.RAYGUN_API_KEY }} \
                                  -v $GITHUB_SHA \
                                  -o "Your Name" \
                                  -e "your@email.com" \
