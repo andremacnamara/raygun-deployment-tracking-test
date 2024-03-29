@@ -20,6 +20,7 @@ jobs:
         run: |
           git config --global user.email "${{ github.event.head_commit.author.email }}"
           git config --global user.name "${{ github.event.head_commit.author.name }}"
+          echo "${{ secrets.GITHUB_TOKEN }}" | git credential-manager-core store
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
@@ -42,7 +43,7 @@ jobs:
         if: success()
 
       - name: Push Tag
-        run: git push origin ${{ steps.tag_release.outputs.tag }}
+        run: git push origin ${{ steps.tag_release.outputs.tag }} --force-with-lease
         if: success()
 
       - name: Track Deployment with Raygun
