@@ -16,12 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14'
-          registry-url: 'https://registry.npmjs.org'
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Git
+        run: |
+          git config --global user.email "${{ github.event.head_commit.author.email }}"
+          git config --global user.name "${{ github.event.head_commit.author.name }}"
+          git config --global credential.helper store
 
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
@@ -44,6 +43,8 @@ jobs:
         if: success()
         
       - name: Push Tag
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: git push origin ${{ steps.tag_release.outputs.tag }} --force-with-lease
         if: success()
 
