@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   const handleNewClick = () => {
-    throw new Error("New error for raygun");
+    throw new Error("New error for raygun test");
   };
 
   return (
