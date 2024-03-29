@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   const handleNewClick = () => {
-    throw new Error("This is a new test exception to track releases.1");
+    throw new Error("New error for raygun");
   };
 
   return (
