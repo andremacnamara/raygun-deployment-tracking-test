@@ -6,18 +6,9 @@ const raygunPlugin = new RaygunWebpackPlugin({
   baseUri: "https://raygun-deployment-tracking-test.vercel.app/",
 });
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // Define environment variables
-  env: {
-    RAYGUN_API_KEY: process.env.RAYGUN_API_KEY,
-
-    // Add more environment variables as needed
-  },
-};
-
 module.exports = {
   plugins: [raygunPlugin],
+  publicRuntimeConfig: {
+    RAYGUN_API_KEY: process.env.RAYGUN_API_KEY || "",
+  },
 };
-
-export default nextConfig;
