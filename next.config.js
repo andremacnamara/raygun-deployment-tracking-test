@@ -7,8 +7,13 @@ const raygunPlugin = new RaygunWebpackPlugin({
 });
 
 module.exports = {
-  plugins: [raygunPlugin],
   publicRuntimeConfig: {
     RAYGUN_API_KEY: process.env.RAYGUN_API_KEY || "",
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.plugins.push(raygunPlugin);
+    }
+    return config;
   },
 };
