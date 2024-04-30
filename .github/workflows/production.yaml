@@ -62,7 +62,7 @@ jobs:
 
       - name: Track Deployment with Raygun
         run: |
-          bash .github/workflows/raygun_deployment_tracking.sh -t ${{ secrets.RAYGUN_PAT_TOKEN }} \
+          bash .github/workflows/raygun_deployment_tracking.yaml -t ${{ secrets.RAYGUN_PAT_TOKEN }} \
                                  -a ${{ secrets.RAYGUN_API_KEY }} \
                                  -v ${{ steps.tag_release.outputs.tag }} \
                                  -o "${{ github.event.head_commit.author.name }}" \
