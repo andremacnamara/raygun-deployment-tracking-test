@@ -61,19 +61,13 @@ jobs:
           prerelease: false
 
       - name: Track Deployment with Raygun
-        continue-on-error: true  # Allows the workflow to continue even if this step fails
-        env:
-          RAYGUN_PAT: ${{ matrix.environment == 'production' && secrets.RAYGUN_PAT_TOKEN || secrets.RAYGUN_PAT_TOKEN }}
-          RAYGUN_API_KEY: ${{ matrix.environment == 'production' && secrets.RAYGUN_API_KEY || secrets.RAYGUN_API_KEY }}
         run: |
-          bash .github/workflows/raygun_deployment_tracking.sh \
-              -t $RAYGUN_PAT \
-              -a $RAYGUN_API_KEY \
-              -v ${{ github.event.release.tag_name }} \
-              -o "${{ github.event.head_commit.author.name }}" \
-              -e "${{ github.event.head_commit.author.email }}" \
-              -n "Deployment notes" \
-              -i "GitHub" \
-              -s "GitHub" \
-              -d "$(date -u +"%Y-%m-%dT%H%M%S)Z"
-              
+          bash .github/workflows/raygun_deployment_tracking.sh -t ${{ secrets.RAYGUN_PAT_TOKEN }} \
+                                 -a ${{ secrets.RAYGUN_API_KEY }} \
+                                 -v ${{ steps.tag_release.outputs.tag }} \
+                                 -o "${{ github.event.head_commit.author.name }}" \
+                                 -e "${{ github.event.head_commit.author.email }}" \
+                                 -n "Deployment notes" \
+                                 -i "GitHub" \
+                                 -s "GitHub" \
+                                 -d "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
