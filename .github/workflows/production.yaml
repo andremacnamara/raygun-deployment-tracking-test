@@ -66,8 +66,8 @@ jobs:
           RAYGUN_PAT: ${{ matrix.environment == 'production' && secrets.RAYGUN_PAT_TOKEN || secrets.RAYGUN_PAT_TOKEN }}
           RAYGUN_API_KEY: ${{ matrix.environment == 'production' && secrets.RAYGUN_API_KEY || secrets.RAYGUN_API_KEY }}
         run: |
-          bash .github/workflows/raygun_deployment_tracking.sh -t ${{ RAYGUN_PAT }} \
-                                 -a ${{ RAYGUN_API_KEY}} \
+          bash .github/workflows/raygun_deployment_tracking.sh -t RAYGUN_PAT \
+                                 -a RAYGUN_API_KEY \
                                  -v ${{ steps.tag_release.outputs.tag }} \
                                  -o "${{ github.event.head_commit.author.name }}" \
                                  -e "${{ github.event.head_commit.author.email }}" \
