@@ -71,7 +71,7 @@ jobs:
           
         run: |
 
-          ./.github/workflows/raygun_deployment_tracking.sh \
+          ./.github/workflows/raygun_deployment_tracking.sh
             -t "$RAYGUN_PAT" \
             -a "$RAYGUN_API_KEY" \
             -v "$VERSION" \
