@@ -47,6 +47,7 @@ export default function RootLayout({
       <body>
         <div>Hello again</div>
         {children}
+        
         <Script
           id="raygun"
           dangerouslySetInnerHTML={initRaygunScript()}
