@@ -76,6 +76,7 @@ jobs:
             -a "$RAYGUN_API_KEY" \
             -v "$VERSION" \
             -o "$AUTHOR_NAME" \
+            -e "$AUTHOR_EMAIL" \
             -n "Deployment notes" \
             -i "GitHub" \
             -s "GitHub" \
