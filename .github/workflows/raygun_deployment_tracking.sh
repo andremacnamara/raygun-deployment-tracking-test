@@ -26,12 +26,35 @@ while getopts ":t:a:v:o:e:n:i:s:d:" opt; do
   esac
 done
 
-if [ -z "$RAYGUN_PAT_TOKEN" ] || [ -z "$RAYGUN_API_KEY" ] || [ -z "$DEPLOYMENT_VERSION" ]; then
+missing_variables=()
+
+# Check if RAYGUN_PAT_TOKEN is missing
+if [ -z "$RAYGUN_PAT_TOKEN" ]; then
+  missing_variables+=("RAYGUN_PAT_TOKEN")
+fi
+
+# Check if RAYGUN_API_KEY is missing
+if [ -z "$RAYGUN_API_KEY" ]; then
+  missing_variables+=("RAYGUN_API_KEY")
+fi
+
+# Check if DEPLOYMENT_VERSION is missing
+if [ -z "$DEPLOYMENT_VERSION" ]; then
+  missing_variables+=("DEPLOYMENT_VERSION")
+fi
+
+# If any of the required variables are missing, display them and exit
+if [ ${#missing_variables[@]} -gt 0 ]; then
+  echo "Error: The following required variables are missing:"
+  for var in "${missing_variables[@]}"; do
+    echo "- $var"
+  done
   echo @"Usage: $0 -t raygun_token -a apiKey -v version 
                   [-o owner_name] [-e email] [-n notes] [-i scm_identifier] 
                   [-s scm_type] [-d deployed_at]"
   exit 1
 fi
+
 
 echo "Registering deployment with Raygun"
 
