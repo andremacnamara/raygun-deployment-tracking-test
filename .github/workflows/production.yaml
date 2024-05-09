@@ -71,14 +71,6 @@ jobs:
           
         run: |
 
-
-          # Debug with echo to verify environment variables
-          echo "RAYGUN_PAT: $RAYGUN_PAT"
-          echo "RAYGUN_API_KEY: $RAYGUN_API_KEY"
-          echo "VERSION: $VERSION"
-          echo "AUTHOR_NAME: $AUTHOR_NAME"
-
-          # Execute the script with variables
           ./.github/workflows/raygun_deployment_tracking.sh \
             -t "$RAYGUN_PAT" \
             -a "$RAYGUN_API_KEY" \
