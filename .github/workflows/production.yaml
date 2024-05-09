@@ -70,9 +70,9 @@ jobs:
           AUTHOR_EMAIL: ${{ github.event.head_commit.author.email || 'Unknown Email' }}
         run: |
           ./.github/workflows/raygun_deployment_tracking.sh
-              -t "${RAYGUN_PAT}" \
-              -a "${RAYGUN_API_KEY}" \
-              -v "${VERSION}" \
+              -t "${env.RAYGUN_PAT}" \
+              -a "${env.RAYGUN_API_KEY}" \
+              -v "${env.VERSION}" \
               -o "${AUTHOR_NAME}" \
               -e "${AUTHOR_EMAIL}" \
               -n "Deployment notes" \
